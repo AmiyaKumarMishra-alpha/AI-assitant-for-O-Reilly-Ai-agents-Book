@@ -1,0 +1,31 @@
+image: python:3.11
+
+stages:
+  - test
+
+variables:
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PIP_NO_CACHE_DIR: "1"
+
+cache:
+  paths:
+    - .venv/
+    - .cache/pip/
+
+before_script:
+  - python -m pip install --upgrade pip
+  - pip install -r requirements.txt
+
+pytest:
+  stage: test
+  script:
+    - pytest -q --junitxml=tests/junit.xml --cov=. --cov-report=xml:coverage.xml
+  artifacts:
+    when: always
+    paths:
+      - tests/junit.xml
+      - coverage.xml
+    reports:
+      junit: tests/junit.xml
+    expire_in: 1 week
+

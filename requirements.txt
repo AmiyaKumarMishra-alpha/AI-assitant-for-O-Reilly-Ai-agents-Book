@@ -1,0 +1,7 @@
+langchain>=0.3.1,<1.0
+langchain-community>=0.1.0
+langchain-ollama>=0.1.0
+faiss-cpu
+pytest>=7.0
+pytest-cov>=4.0
+numpy

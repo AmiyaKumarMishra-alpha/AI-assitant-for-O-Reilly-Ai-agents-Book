@@ -1,0 +1,272 @@
+
+Chapter 1. Introduction
+A Note for Early Release Readers
+
+With Early Release ebooks, you get books in their earliest form—the author’s raw and unedited content as they write—so you can take advantage of these technologies long before the official release of these titles.
+
+This will be the 1st chapter of the final book. Please note that the GitHub repo will be made active later on.
+
+If you’d like to be actively involved in reviewing and commenting on this draft, please reach out to the editor at mcronin@oreilly.com.
+
+In 2024, AI Agents began reshaping the AI landscape as we knew it. Where ChatGPT, at the end of 2022, revolutionized the field of Large Language Models (LLMs), AI Agents took a major step further and were designed to act with autonomy, pursue goals, and even interact with the world. Rather than just generating text, these agents are capable of advanced reasoning, memorizing complex interactions, and creating entire codebases.
+
+This shift is monumental and not just an incremental improvement. It redefines how we interact with AI. Where LLMs require significant hand-holding, AI Agents are capable of autonomously deciding which actions to take, when to take them, and even how. It is this agency that makes them such interesting entities and will be a core focus throughout this book.
+
+With Coding Agents becoming a staple in every software developer’s toolkit, we have just begun to understand the potential this technology has. AI Agents, in various forms, are beginning to integrate into all manner of fields, from finance to healthcare, and marketing to scientific research. This pace of improvements in AI, and AI Agents in particular, has been daunting.
+
+That is where this book, and in particular this chapter, comes in. This chapter serves as the scaffolding for the rest of the book and will introduce concepts and terms that we will use throughout all chapters. Mostly, we will give a brief answer to the question: “What is an AI Agent?”. This answer will be your guide throughout all of the upcoming chapters, where each subsequent chapter will uncover an important component of an AI Agent. You can expect an intuitive, but in-depth journey, of what makes AI Agents so special.
+What Is an AI Agent?
+
+The definition of an AI Agent is ever-changing as the field progresses and as these entities grow in complexity. Fortunately, as with most technologies, the fundamentals of AI Agents are rather static and a great way to build up to more state-of-the-art techniques. As such, we consider the following definition of AI Agents rather meaningful through both the fundamentals and new advances in this field:
+
+    An agent is anything that can be viewed as perceiving its environment through sensors and acting upon that environment through actuators.
+
+    Russell & Norvig, AI: A Modern Approach 1
+
+This definition boils Agents down to entities that perceive and interact with their environment. It is broad enough to consider entities other than LLMs, but at the same time, it gives us something structured to work with.
+
+We can deconstruct this definition into the following components that lie at the heart of Agents:
+
+Environment
+
+    The world the agent interacts with
+Sensors
+
+    Components of the Agent used to observe the environment
+Actuators
+
+    Tools the Agent uses to interact with the environment
+Effector
+
+    The “brain” or rules deciding how to go from observations to actions
+
+The interaction of all these components is shown in Figure 1-1.
+Diagram of a diagram of a sensor actuators and environment AI-generated content may be incorrect.
+Figure 1-1. [caption]
+
+This terminology, although rich in meaning, can be quite theoretical and is somewhat removed from what we see in practice. We prefer to move from abstract to concrete, so let’s clarify what these components mean by relating them to LLMs.
+
+In practice, the Effector or brain of the Agent tends to be a “reasoning” LLM, a model that is capable of complex thinking. Through additional modules (memory, tools, and planning), this LLM is capable of interacting with its environment. Here, the Actuators are the tools of the LLM. Some LLMs can interpret more than text, such as images or sound, and can be considered as the Sensors in this system. The last piece missing from this system is the user, who can be part of the Environment. Without any interaction from the user, the LLM will not take any action and is typically highly influenced by how the user initiates this Agent.
+
+Together, these aspects are what we believe to be truly fundamental to AI Agents as we see them in practice. Figure 1-2 illustrates how all these components are connected. More importantly, this figure does not just elucidate the principles of Agents, but also tells a story: A story of what Agents truly are, how they are created, and how they behave. It serves as the foundation of this book and will be used throughout to build up the Agent.
+A close-up of a sign AI-generated content may be incorrect.
+Figure 1-2. [caption]
+
+Let’s go through each component in more detail and clarify how they relate to the book structure.
+Large Language Models (Chapter 2)
+
+To understand what AI Agents are, we first need to explore the basic capabilities of an LLM, as the LLM is typically considered to be the “brain” of an Agent. Traditionally, an LLM is a model that does nothing more than predict the next word based on a given input text. As shown in Figure 1-3, the LLM first breaks down a given input query into tokens, which are sub-components of words that allow the model to generalize to words it has not seen before. The LLM processes these tokens, and a prediction is made on what the next token could be.
+A diagram of a pink diagram AI-generated content may be incorrect.
+Figure 1-3. [caption]
+
+The LLM therefore predicts the next token, uses the predicted token to update its input, and then continues the predictions. By doing this iteratively (which is called autoregression), it can create entire answers to the user’s query (shown in Figure 1-4).
+A diagram of a process AI-generated content may be incorrect.
+Figure 1-4. [caption]
+
+In Chapter 2, we will explore in detail how this brain works. The common architecture of LLMs, attention, and its many variants, will be explored to give you an understanding of its internal mechanisms.
+Reasoning Large Language Models (Chapter 3)
+
+Arguably, one of the most impactful LLMs is GPT-3.5, the original ChatGPT released back in November 2022. As a chat model, GPT-3.5 could hold entire conversations, making it eerily similar to how humans would interact. It is safe to say that this model changed the world as we know it. Over the years since, OpenAI and many other LLM providers have focused on scaling GPT-3.5-like models to new heights by throwing more data, compute, and parameters at these models. This is called train-time scaling (as shown in Figure 1-5), where training these models on more data and making them larger had a proportional effect on performance. The idea was that pre-training (the first and most expensive part of training an LLM) is the fossil fuel of AI. The larger your pre-training budget, the better the resulting model will be.
+A diagram of a computer AI-generated content may be incorrect.
+Figure 1-5. [caption]
+
+Although this improved the performance of these models, it uncovered a ceiling effect. Continuously scaling the model’s size is not cost-effective, and soon, training simply became too expensive for the small increase in performance. As it turns out, scaling your model can be done in more ways than one.
+
+As you will notice throughout this book, many ideas underpinning the astonishing capabilities of AI Agents are actually derived from human behavior. When we approached the ceiling of train-time scaling, we looked towards what the models need to emulate, ie, humans. Quite often, these models are compared to humans to gauge their capabilities, and as a result, we strive to mimic human behavior in the models to get the same performance. In the context of train-time scaling, the field of AI Agents started to notice that the capabilities of LLMs would increase substantially if they could reason. Instead of having the model “think” quietly (through the model’s parameters), they were now trained to “think” out loud (by generating reasoning traces before deriving the answer). As shown in Figure 1-6, reasoning LLMs first generate “thoughts” and leverage that to generate the final answer.
+A diagram of a tree AI-generated content may be incorrect.
+Figure 1-6. [caption]
+
+The main idea is that it allows LLMs to write down their thoughts first through their autoregressive behavior before coming to an answer. Instead of spending all of its compute to generate only the answer, it spends additional compute to first generate its “thoughts”. Like humans, by structuring their thoughts, more complex queries that require multi-step reasoning are easier to solve. In practice, these thoughts are typically hidden from the user, whereas the answer to the user’s query generally represents a summary of the model’s “thoughts” (see Figure 1-7).
+A screenshot of a chat AI-generated content may be incorrect.
+Figure 1-7. [caption]
+
+Part of what makes AI Agents so human-like is their ability to make extensive plans, select the appropriate tools, reflect on their mistakes, and even dynamically revise and update these plans. All of these require advanced reasoning behavior in LLMs. Reasoning LLMs are particularly capable at complex decision-making tasks, breaking down multi-step problems, and generalizing to novel problems. However, if you want fast and cheap responses, “regular” LLMs are preferred.
+
+As such, reasoning LLMs will take a central role throughout most of this book, as it is arguably the foundation of what enables these complex behaviors. In Chapter 3, you will learn about various ways to create reasoning LLMs. We look at the fundamentals of reasoning LLMs, explore the famous reasoning LLM, DeepSeek-R1, and look beyond at what the future might hold in this field. Together with Chapter 2, these chapters will therefore focus on the “brain” of the Agent (shown in Figure 1-8).
+A diagram of a large language AI-generated content may be incorrect.
+Figure 1-8. [caption]
+Augmenting the LLM (Chapters 4, 5, 6)
+
+Although reasoning LLMs are vital to AI Agents, they are still incomplete and miss certain functionalities. As static text-to-text entities, LLMs have no control over their environment, nor do they remember their interactions or learn from these interactions.
+
+Let us explore how to go from an incredibly capable LLM to one that can remember interactions, interact with its environment, and demonstrate various degrees of autonomy.
+Memory
+
+Notice how, thus far, we have only shown “single-turn” conversations. These conversations contain a single question and answer pair in the interaction with the LLM. If we were to continue this conversation and ask another question, we would turn it into a “multi-turn” conversation. Multi-turn conversations expose a vital flaw of LLMs, namely that they are forgetful entities and do not remember past conversations (see Figure 1-9). They are stateless, which means that information is not persisted across calls.
+A collage of different words AI-generated content may be incorrect.
+Figure 1-9. [caption]
+
+Without memory, LLMs are nothing more than answering machines. Ask it a question and get an answer. However, follow it up with another question, and the LLM has no information about the former interaction.
+
+Fortunately, there are many ways we can add memory modules to LLMs to mimic memory. As shown in Figure 1-10, a common way to approach this is by simply adding the previous conversation to the current prompt.
+A diagram of a conversation AI-generated content may be incorrect.
+Figure 1-10. [caption]
+
+In practice, however, memory modules can be quite complex. They share many similarities with our memory systems, such as short-term and long-term memory, but also in how we process information. If we receive too much information, it becomes difficult to process, which can lead to poor decision-making. This is called information overload and can be a real problem even for LLMs. As such, memorizing every little detail might hurt the performance of an LLM, so a balance is needed between the amount and quality of the information in the prompt. This is called context engineering and, as shown in Figure 1-11, attempts to balance the information available and what we give the LLM.
+A diagram of a conversation diagram AI-generated content may be incorrect.
+Figure 1-11. [caption]
+
+In Chapter 4, we will discuss these various types of memory, including short-term and long-term memory.
+Tools
+
+With memory, LLMs remember the conversations they previously had, but they are not yet capable of interacting with their environment. LLMs can interact with their digital environment through external tools that may enhance their capabilities. These tools vary in complexity and can range from straightforward calculators and search engines to giving them access to your command shell and coding environment.
+
+However, LLMs are not capable of using tools by themselves. Fundamentally, LLMs can be seen as software or functions that, upon receiving input text, process it and then output some text. As text-in/text-out functions, LLMs can only describe or show the intent of taking the action when outputting text. This is shown in Figure 1-12, where the LLM, upon receiving the query “What is 2.3 times 8.1?” generates the string “multiply(2.3, 8.1)”. This string merely represents the LLM’s intention to take an action, but the action itself is not taken without outside intervention.
+A black rectangle with text AI-generated content may be incorrect.
+Figure 1-12. [caption]
+
+The LLM can express the intent to use a tool, but it relies on us to turn that intent into an actual tool call. The user will need to write software to convert that text into an action. For instance, if LLM’s output were JSON, we would use that to choose the correct tool and fill in its parameters. Those actions would need to be programmed ourselves. Figure 1-13 illustrates these steps, showing a possible representation of the overall flow.
+A diagram of a multiplying program AI-generated content may be incorrect.
+Figure 1-13. [caption]
+
+There are many ways an LLM can use and learn tools, which we will cover in Chapter 5, along with how using the same tools by different LLMs can be standardized with the Model Context Protocol.
+
+Chapters 2 through 5 give us, as shown in Figure 1-14, what Anthropic calls: “The Augmented LLM”. This LLM is capable of deciding which tools to use, how to use them, and what kind of information to retain. These augmentations (memory and tools) allow for interaction with the environment in meaningful ways.
+A diagram of a language model AI-generated content may be incorrect.
+Figure 1-14. [caption]
+Planning and Reflection
+
+The final ingredient to go from a “regular” LLM to an AI Agent is its ability to plan and reflect. These capabilities are important throughout much of an agentic system as the Agent will need to decide which steps to take, how to take them, and when. For instance, if the LLM has access to dozens of GitHub API tools, like looking at pull requests or commits, how does it decide which to use?
+
+This is where planning comes in, which involves breaking down a large task into smaller, actionable steps, which is referred to as task decomposition. As shown in Figure 1-16, the first step is to typically create a plan to execute when presented with a query.
+A diagram of a computer AI-generated content may be incorrect.
+Figure 1-15. [caption]
+
+By continuously referring back to this plan, the LLM is capable of executing each of these tasks one at a time. Doing them all at once is seldom efficient, and each task might influence another. As shown in Figure 1-17, after completing a specific task, the LLM might still reason about which steps to take next. As such, reasoning is fundamental and often a necessity for your Agent to plan out complex behavior.
+A diagram of a computer AI-generated content may be incorrect.
+Figure 1-16. [caption]
+
+But creating a plan is not sufficient. The LLM might discover halfway through its plan that some of its steps might not be appropriate. In our previous example, the LLM would discover that Google and ArXiv are insufficient as resources and instead add a task to add Semantic Scholar and PubMed as resources to go through.
+
+This reflective behavior makes Agents seem humanlike, as they attempt to uncover their faults and make attempts to fix them. By reflecting on past behavior, the initial plan can be continuously improved. Illustrated in Figure 1-18, planning and reflection create an iterative loop of planning out tasks, taking actions, and reflecting on the output.
+Figure 1-17. [caption]
+
+Together, reasoning LLMs augmented with memory, tools, planning, and reflection are what we consider to be an AI Agent. In Chapter 6, as shown in Figure 1-18, we will explore planning and reflection and how they connect all augmentations of the LLM to create the AI Agent.
+A diagram of a computer language model AI-generated content may be incorrect.
+Figure 1-18. [caption]
+An Agentic System (Chapter 7)
+
+With all these components, a Reasoning LLM augmented with memory, tools, and planning, we arrive at the next stage of the Agent; the way it behaves inside a system. This covers common use cases, degree of autonomy, ethical considerations, and how these agents and systems can be evaluated.
+Autonomy
+
+The AI Agent, as we have defined it thus far, has a fair bit of freedom. It can choose between tools, decide to update the initial plan, add additional steps, or stop because it has reached the appropriate response. All of this advanced behavior is the autonomy that is given to the Agent. In practice, not all Agents will have complete autonomy; guardrails are often necessary so that the model does not take potentially destructive actions.
+
+Depending on the AI Agent and the system in which it is integrated, they can have varying degrees of autonomy. As shown in Figure 1-20, this autonomy can be partial, where the model can only execute a single step but has the freedom to choose from tools, or it can be complete freedom without any guardrails.
+A diagram of a process flow AI-generated content may be incorrect.
+Figure 1-19. [caption]
+
+Depending on who you ask, a system is more “agentic” the more the LLM has full control over its actions. However, we believe that as long as the Agent exhibits goal-directed behavior and makes decisions, we can call it an Agent. Autonomy exists on a spectrum, and partial autonomy in orchestrated workflows can still qualify as agency if the Agent acts with some degree of independence. Across all chapters, we will cover both autonomous systems as well as orchestrated workflows.
+Agentic Applications: What Makes Them So Useful?
+
+Agents’ abilities for autonomous behavior make them especially useful for open-ended problems where the exact steps required are not known beforehand. The LLM can reason on how to approach a problem and the number of turns to complete it. This autonomy and self-driving behavior thrives in environments where the goal might be clear, but the path to reach it is not.
+
+As such, Agents are often used for:
+
+Coding — Coding assistants are arguably the most common use case to date. With so much knowledge about code, Agents are capable of writing it themselves and going through the steps of writing new code, but also validating it. This is a use case where the Agent truly shines as the goal is quite clear (a specific feature) and often with predefined requirements (language, frameworks, etc.) to work towards with some degree of freedom.
+
+Deep Research — This is an upcoming field where Agents are used to perform in-depth analyses on various topics without much intervention by the user. You can ask these agents to research a given topic, and it will, autonomously, search for everything related to that topic on sources like ArXiv, PubMed, and Google Scholar. They are not yet without flaws, but they are a great starting point whenever you want to dive into a new topic.
+
+Automation — Although you wouldn’t use an Agent for diagnosing patients or to handle claims automatically without any human interaction, there are many useful places where Agents would have a large impact. Standardization and automation of processes are great examples. For instance, hospitals across the world differ in how data is stored (both structured and unstructured). Agents are capable of searching through various data sources to structure the wide array of patient data, allowing for easier research in healthcare.
+Responsible Agent Development and Usage
+
+As we explore the incredible capabilities of LLMs, it is important to keep their societal and ethical implications in mind. This is especially true for Agents, which can have a degree of autonomy that might directly impact the digital/physical world. Whilst many think the future of Agents is fully autonomous systems, others state that fully autonomous agents should not be developed at all due to the risk of giving away control.2 We are currently somewhere in the middle. Agents can be amazing entities and help optimize many processes, like coding agents. However, having an Agent diagnose patients without any human intervention is, with the current state of technology, harmful behavior. As with most things, it is all about the context in which Agents are used.3
+
+As such, here are key points to consider:
+
+Human in the loop
+
+    As Agents become more autonomous, there is a greater need for humans in the loop to check the decisions that were made. This can be in many forms, as will be discussed throughout the book, but typically involves a human checking either the output or intermediate steps before continuing.
+Guardrails
+
+    There is no need to always build a fully autonomous Agent. Not only can that be overkill for the task at hand, but it can even be harmful. A system with many guardrails can be just as effective, as it allows steering the Agent to focus on the (sub)-task at hand.
+Misinformation
+
+    Ai Agents are still LLMs, which are prone to confidently spreading incorrect information, also called hallucination. Although LLMs are becoming much more capable, additional checks and balances are needed in systems where correct information is critical.
+
+Evaluating Agents
+
+Responsible Agent development brings us to an important component of building any Agent: evaluation strategies. Where LLMs are already quite difficult to evaluate, Agents take it a step further. LLMs are typically evaluated on text-to-text tasks, where metrics such as coherence and relevance can be used. Agents, in contrast, perform more complex operations, which may include multi-step reasoning and tool calling. This requires more extensive evaluation due to the Agents’ many different dimensions of capabilities. Likewise, Agents often take many actions in a sequence, where each action can be evaluated from different perspectives (efficiency, correctness, alignment with user intent, etc.).
+
+Agents, as “Augmented LLMs”, should not only be evaluated on the textual output they may produce. Since Agents can interact with their environments, evaluation may include the success of completing a task, such as sending a message or updating a record. This success can be focused on the output (whether a task was completed successfully) and the process (was the task completed efficiently, with few steps).
+
+Beyond task efficiency and correctness, evaluation should include safety, trustworthiness, and policy compliance. Evaluation helps prevent harmful behavior when deployed in mission-critical systems, especially if they directly affect users. As such, evaluating Agents is much more than evaluating a model; it is evaluating an entire system.
+
+We believe that evaluation is fundamental to Agents, largely due to its impact it can have. In Chapter 7, we detail the possible evaluation of Agents and the things to look out for when creating your own.
+
+Together with Chapter 7, Part 1 of the book will primarily focus on the fundamentals of a single Agent, how it is built, and how it can be evaluated. Part 1 of the book is visualized in Figure 1-20 and will serve as the common thread throughout these chapters.
+A diagram of a large language model AI-generated content may be incorrect.
+Figure 1-20. [caption]
+Specializations
+
+The single Agent covered in Part 1 of this book gives you an assistant that, to a certain degree, can autonomously decide how to tackle a given problem. Although it’s already an entity on its own that can achieve amazing results, there are many variants of Agents that can take them a step further. Specializations like multi-modal Agents can see the world through more lenses than just text, whereas others, like coding Agents, are created for specific use cases.
+
+In this second part of the book (see Figure 1-21), we will explore these specialized Agents and their use cases, starting with how systems can be created where multiple Agents work together.
+A diagram of a company AI-generated content may be incorrect.
+Figure 1-21. [caption]
+Multi-Agent Collaboration (Chapter 8)
+
+When systems grow larger and tasks are more specialized, we start looking towards Multi-Agent collaborations. These are systems where multiple different Agents are deployed that are each responsible for different tasks. Compared to single-agent systems, Multi-Agent systems interact with one another and might consult each other’s specialties. As shown in Figure 1-22, the main differences lie in how many Agents are deployed and their interactions with one another.
+A diagram of a agent and multi-agent AI-generated content may be incorrect.
+Figure 1-22. [caption]
+
+These Multi-Agent systems often contain specialized Agents, each equipped with different toolsets. Although workflows may differ, there is often a supervisor Agent that manages communication between, and sometimes within, Agents. In practice, the supervisor Agent tends to have the most capable LLM, as the supervisor is in charge of advanced behavior like planning, decomposing, and assigning tasks (see Figure 1-23).
+A diagram of a company AI-generated content may be incorrect.
+Figure 1-23. [caption]
+
+Although the supervisor Agent is common, this does not always have to be the case. In practice, there are dozens of Multi-Agent architectures to explore, some with structured orchestration (like the supervisor) and some with unstructured orchestration.
+
+In Chapter 8, we explore these Multi-Agent architectures with concrete examples. You will learn how these architectures are created and when they should be used.
+The Multi-Modal Agent (Chapters 9, 10)
+
+Understanding of its environment and the interactions the Agent has with it are fundamental to an Agent’s behavior. A traditional Agent will only do so through text, as the underlying LLM is only capable of processing text (input) and generating text (output). The digital world, however, is much more than a place filled with text. An Agent might need to optimize the color schemes of your website and will need to “see” it. It can only go so far by reading through the hexadecimal values in your code. Likewise, a traditional Agent can only reply in text, but what if the situation requires it to have a voice instead? If your vision deteriorates, or you can’t type because of repetitive strain injury (RSI) problems, being able to talk to your Agent through voice becomes necessary. This is where Multi-Modal Agents are gaining traction. As the digital world is not composed of a single modality, interaction with it should not only be done through text.
+
+Whether Agents are Multi-Modal is primarily decided by the nature of their “brains”, namely the LLM. We can consider an Agent to be Multi-Modal if the LLM it uses is capable of processing and/or generating different modalities. This also points us towards the two most important components of what makes an LLM Multi-Modal, their capabilities to:
+
+    Understand multiple modalities and/or
+
+    generate multiple modalities.
+
+When the LLM can reason about several modalities simultaneously, like text, images, audio, and video, we refer to this Multimodal LLM as being capable of understanding multiple modalities. This can be quite helpful in various situations, like optimizing a website’s design, where the LLM needs to be able to “see” what is actually happening. Shown in Figure 1-24, Chapter 9 will explore multimodal understanding in LLMs through two important components: an encoder for converting modalities into numeric information and a connector to connect those representations to the LLM.
+A diagram of a computer language AI-generated content may be incorrect.
+Figure 1-24. [caption]
+
+When an LLM generates another modality besides text, then this Multimodal LLM is capable of generating multiple modalities. This currently requires a vastly different process than the previous aspect, understanding multiple modalities. Shown in Figure 1-25, we cover the other side of the process where a generator is used to generate modalities other than text.
+Diagram of a diagram AI-generated content may be incorrect.
+Figure 1-25. [caption]
+The Coding Agent (Chapters 11, 12)
+
+Another popular variant of Agents is the Coding Agent. Unlike traditional AI assistants, where you have a back-and-forth discussing code, a Coding Agent can actually run the program. Even more, it can read existing codebases, generate new functions, fix bugs, and test what it has created. A Coding Agent can be an autonomous developer, where you are in charge of checking its output. In practice, however, a Coding Agent is often used as a Coding Assistant that will suggest improvements, whether it is an entirely new function or a smarter autocomplete.
+
+Coding Agents can be complex entities as codebases grow and require an environment for the Agent that is easy to follow for both the Agent and you, the user. Think of creating special markdown files with instructions for specific features or adding specific tools when an Agent is working on a particular feature.
+
+How you can effectively build and use Coding Agents will be discussed in Chapter 11. In chapter 12, we delve into how reinforcement learning (RL) is used to create and improve Coding Agents.
+The Tiny Agent (Chapter 13)
+
+Agents can be costly things. The cost of LLM usage is often defined by how much you pay per million tokens, but Agents do not know beforehand how many tokens they might need to solve a task. As such, an autonomously running Agent could easily break the bank, and making the Agent more efficient is vital. Over the years, there have been many architectural advancements in LLMs to make them smaller and faster.
+
+There are four main categories of improvements where you might look:
+
+    Creating smaller models (e.g., through distillation)
+
+    Making LLM architecture more efficient (e.g., using Mixture of Experts or State Space Models)
+
+    Decreasing the cost of inference (e.g., through speculative decoding)
+
+    Making existing models more performant (e.g., hierarchical and recursive decoding)
+
+In Chapter 13, we will explore various ways to make LLMs more efficient.
+Summary
+
+This first chapter serves as the scaffolding of this book. Consider it an overview of what an Agent is and how it relates to every upcoming chapter, split up into two main sections.
+
+In part one of the book, we will cover the “brain” of the Agent, namely, reasoning LLMs and how they can be augmented with memory, tools, and planning to interact with their environment. They show a degree of autonomy that requires a thorough understanding of the use case to decide when to implement additional guardrails and limit its autonomy or give it full control. This makes evaluation even more important and potentially complex.
+
+In part two of the book, we will cover various specializations, starting with how Agents might interact with each other as specialized entities. Then, we explore how LLMs understand the world through lenses other than text. A special focus will be given on images, sound, and video as these are common other modalities the Agent might interact with. Special attention is given to Coding Agents as one of the most common use cases. We end this book with a chapter on efficiency.
+
+In the next two chapters, we will cover the fundamentals of LLMs and Reasoning LLMs, the “brain” of AI Agents.
+
+1 Stuart Russell and Peter Norvig, Artificial Intelligence: A Modern Approach, 4th ed. (Pearson, 2020).
+
+2 Mitchell, Margaret, et al. “Fully autonomous ai agents should not be developed.” arXiv preprint arXiv:2502.02649 (2025).
+
+3 Gabriel, Iason, et al. “The ethics of advanced ai assistants.” arXiv preprint arXiv:2404.16244 (2024). 

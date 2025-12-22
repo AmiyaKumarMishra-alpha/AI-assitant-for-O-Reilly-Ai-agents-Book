@@ -84,10 +84,10 @@ def retrieve_similar_chunks(query):
 
 def getFinalPrompt(user_query):
     system_prompt = """You are a helpful AI assistant. Use ONLY the provided retrieved chunks (labeled [chunk-N]) and the user's query exactly as given: {user_query}.
-Do NOT use any external knowledge or make things up. Provide a concise, factual answer grounded only in the provided chunks.
-Return ONLY the final answer text — no chain-of-thought, analysis, or extra commentary. Do NOT mention the book, the author, or apologize.
-If the chunks do not contain relevant information, reply exactly: "I could not find any information on that topic in the provided context."
-If you include citations, cite at most two chunks in the format [source: chunk-N]. Keep the answer under 200 words. Avoid profanity and harmful content."""
+                    Do NOT use any external knowledge or make things up. Provide a concise, factual answer grounded only in the provided chunks.
+                    Return ONLY the final answer text — no chain-of-thought, analysis, or extra commentary. Do NOT mention the book, the author, or apologize.
+                    If the chunks do not contain relevant information, reply exactly: "I could not find any information on that topic in the provided context."
+                    If you include citations, cite at most two chunks in the format [source: chunk-N]. Keep the answer under 200 words. Avoid profanity and harmful content."""
     return system_prompt.format(user_query=user_query)
 
 #load llm model and generate answer

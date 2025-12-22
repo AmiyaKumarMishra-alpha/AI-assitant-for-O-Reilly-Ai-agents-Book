@@ -1,7 +1,7 @@
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain.embeddings import OllamaEmbeddings
-from langchain.vectorstores import FAISS
+from langchain_ollama import OllamaLLM, OllamaEmbeddings
+from langchain_community.vectorstores import FAISS 
 import os
 
 # Load the text file

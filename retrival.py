@@ -1,6 +1,6 @@
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain.llms import Ollama
+from langchain_ollama import OllamaLLM
 
 VECTOR_DB_PATH = "./vector_db"
 top_k = 20
@@ -91,7 +91,7 @@ def getFinalPrompt(user_query):
     return system_prompt.format(user_query=user_query)
 
 #load llm model and generate answer
-llm = Ollama(
+llm = OllamaLLM(
     model="llama3.1:8b",    temperature=0.8
 )
 
@@ -106,7 +106,7 @@ def generate_answer(prompt, chunks):
     combined_input = prompt + "\n\n" + "\n\n".join(chunk_texts)
 
     # Call the LLM
-    output = llm(combined_input)
+    output = llm.invoke(combined_input)
 
     # Confidence calculation: combine absolute top-similarity with relative dominance
     # Rationale: softmax-only can yield low probabilities when many similar chunks exist.

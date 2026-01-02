@@ -40,5 +40,4 @@ server.add_tool( #type: ignore
 
 
 if __name__ == "__main__":
-    # ✅ THIS IS THE KEY FIX
     server.run_stdio() #type: ignore
